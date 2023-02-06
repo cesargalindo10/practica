@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+ function App() {
+  const [usuarios, setPostres] = useState([])
+
+	useEffect(() => {
+		fetch("practica/mockdata_usuarios.json")
+		.then((response) => response.json())
+		.then((datos) => {
+      
+			setPostres(datos)
+		})
+	}, [])
+
+  console.log(usuarios)
+  
+
+	return (
+
+		<div className="container mt-5" align="center">
+      
+	      <h4>Lista </h4>          
+	         
+
+	           {usuarios.map(item => (
+
+	             <div>
+	                <p>{item.nombre}</p>
+	                <p>{item.stock}</p>
+	                <p>{item.precio}</p>
+	               
+                </div>               
+	            
+	            ))}
     </div>
-  );
+)
+ 
 }
-
-export default App;
+export default  App;
