@@ -1,0 +1,22 @@
+.App{
+    max-width: 60%;
+    margin: auto;
+}
+.container{
+    width: 60%;
+    margin: auto;
+}
+
+.Female{
+    
+    border: 2px solid green;    
+    border-radius: 20px;
+    
+}
+.Male{
+    
+    
+    border: 2px solid blue;
+    border-radius: 20px;
+   
+}
