@@ -14,7 +14,7 @@ export const ApiServices = {
         }
     },
     createProducto:async(data)=>{
-        fetch(APIURL+'producto/update', {
+        fetch(APIURL+'producto/create', {
             method: 'POST', 
             body: JSON.stringify(data), 
             headers:{
