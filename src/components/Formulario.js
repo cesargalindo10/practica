@@ -5,18 +5,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function Formulario({crearProducto,handleClose,setValue,value }) {
+function Formulario({crearProducto,handleClose,setValue,value, info, edicion }) {
 
     const handleChange = (e) => {
         //console.log(e.target.value)
-        setValue({
-            ...value, [e.target.name]: e.target.value,
-        })
+        if(edicion){
+            setValue(info)
+        }else{
+            setValue({
+                ...value, [e.target.name]: e.target.value,
+            })
+        }
+       
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         //console.log(value)
         crearProducto()
+
         setValue({
             nombre: "",
             descripcion: "",
@@ -41,6 +47,7 @@ function Formulario({crearProducto,handleClose,setValue,value }) {
                             name="nombre"
                             value={value.nombre}
                             onChange={handleChange}
+                            
 
                         />
                     </Form.Group>

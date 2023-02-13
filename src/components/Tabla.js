@@ -1,18 +1,17 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import Informacion from './Informacion';
-import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
 
-function Tabla({ data,setInfo, b, setB }) {
+
+function Tabla({ data,setInfo, info, showInfo,setShowInfo, handleShow, setEdicion }) {
 
     //const [b,setB]=useState(false)
 
-    function showInfo(res){
+    function mostrarInfo(res){
         setInfo(res)
-        setB(!b)
+        setShowInfo(!showInfo)
+        
     }
-    console.log(b)
+    //console.log(b)
     return (
         <div className='container'>
             <Table striped bordered hover>
@@ -30,11 +29,11 @@ function Tabla({ data,setInfo, b, setB }) {
 
                         <tbody key={res.id}>
                             <tr>
-                                <td key={res.id}>{res.id}</td>
+                                <td  >{res.id}</td>
                                 <td>{res.nombre}</td>
-                                <td >
-                                    <Button onClick={()=>showInfo(res)} variant="info">{b? "Show":"Hide"}</Button>{' '}
-                                    <Button>Editar</Button>{' '}
+                                <td>
+                                    <Button onClick={()=>mostrarInfo(res)} variant="info">{ res.id===info.id && showInfo?"Hide":"Show"}</Button>{' '}
+                                    <Button onClick={()=>{mostrarInfo(res);handleShow();setEdicion(true)}}>Editar</Button>{' '}
                                     <Button variant="danger">Eliminar</Button>                             
                                 </td>
                             </tr>

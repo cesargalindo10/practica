@@ -15,7 +15,9 @@ export default function Producto() {
     const [page, setPage] = useState(1);
     const [show, setShow] = useState(false);
     const [info, setInfo] = useState([])
-    const [b,setB]=useState(false)
+    const [showInfo,setShowInfo]=useState(false)
+    const [edicion,setEdicion] = useState(true)
+    
 
 
     const handleClose = () => setShow(false);
@@ -38,16 +40,18 @@ export default function Producto() {
         await ApiServices.getProductos(page)
             .then(res => {
                 setData(res.data)
-                setPaginacion(res.pagination)
+                setPaginacion(res.pagination)                          
+       
             }
             )
-
+           
 
     }
 
+
     useEffect(() => {
         loadProducto()
-    }, [page])
+    },[page])
 
 
     const notify = () => toast('Hello World', {
@@ -73,13 +77,12 @@ export default function Producto() {
             'aria-live': 'polite',
         },
     });
-
-
+   
     return (
         <div>
             <Toaster /> 
             {
-                b ? <Informacion info={info}/> : ""
+                showInfo ? <Informacion info={info}/> : ""
             }
             
             <Button onClick={handleShow}>Crear</Button>
@@ -95,13 +98,16 @@ export default function Producto() {
                         handleClose={handleClose}
                         setValue={setValue}
                         value={value}
+                        info={info}
+                        edicion={edicion}
                     />
                 </Modal.Body>
             </Modal>
           
-            <Tabla data={data} setInfo={setInfo} b={b} setB={setB}/>
-            <button onClick={() => setPage(paginacion.paginaAnterior)}>Anterior</button>
-            <button onClick={() => setPage(paginacion.PaginaSiguiente)}>Siguiente</button>
+            <Tabla data={data} setInfo={setInfo} info={info} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setEdicio={setEdicion}/>
+            
+            <button onClick={() => setPage(paginacion.paginaAnterior)} disabled={paginacion.paginaAnterior==null? true:false}>Anterior</button>
+            <button onClick={() => setPage(paginacion.PaginaSiguiente)} disabled={paginacion.PaginaSiguiente==null? true:false}>Siguiente</button>
         </div>
     );
 
