@@ -5,6 +5,7 @@ import Formulario from './Formulario';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Tabla from './Tabla';
+import Informacion from './Informacion';
 
 export default function Producto() {
 
@@ -13,11 +14,14 @@ export default function Producto() {
     const [paginacion, setPaginacion] = useState([]);
     const [page, setPage] = useState(1);
     const [show, setShow] = useState(false);
+    const [info, setInfo] = useState([])
+    const [b,setB]=useState(false)
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
+    
     const [value, setValue] = useState({
         nombre: "",
         descripcion: "",
@@ -74,7 +78,11 @@ export default function Producto() {
     return (
         <div>
             <Toaster /> 
-            <Button onClick={handleShow}> Crear</Button>
+            {
+                b ? <Informacion info={info}/> : ""
+            }
+            
+            <Button onClick={handleShow}>Crear</Button>
             <Modal
                 show={show} onHide={handleClose}
                 dialogClassName="modal-90w"
@@ -90,7 +98,8 @@ export default function Producto() {
                     />
                 </Modal.Body>
             </Modal>
-            <Tabla data={data}/>
+          
+            <Tabla data={data} setInfo={setInfo} b={b} setB={setB}/>
             <button onClick={() => setPage(paginacion.paginaAnterior)}>Anterior</button>
             <button onClick={() => setPage(paginacion.PaginaSiguiente)}>Siguiente</button>
         </div>

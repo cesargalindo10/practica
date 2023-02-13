@@ -4,8 +4,15 @@ import Informacion from './Informacion';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 
-function Tabla({ data }) {
-    const [info,setInfo]=useState([])
+function Tabla({ data,setInfo, b, setB }) {
+
+    //const [b,setB]=useState(false)
+
+    function showInfo(res){
+        setInfo(res)
+        setB(!b)
+    }
+    console.log(b)
     return (
         <div className='container'>
             <Table striped bordered hover>
@@ -14,7 +21,7 @@ function Tabla({ data }) {
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th style={{ width: "230px" }}>Accion</th>
+                        <th style={{ width: "250px" }}>Accion</th>
                     </tr>
                 </thead>
                 {
@@ -25,8 +32,8 @@ function Tabla({ data }) {
                             <tr>
                                 <td key={res.id}>{res.id}</td>
                                 <td>{res.nombre}</td>
-                                <td>
-                                    <Button onClick={()=>setInfo(res)} variant="info">Ver</Button>{' '}
+                                <td >
+                                    <Button onClick={()=>showInfo(res)} variant="info">{b? "Show":"Hide"}</Button>{' '}
                                     <Button>Editar</Button>{' '}
                                     <Button variant="danger">Eliminar</Button>                             
                                 </td>
@@ -38,9 +45,7 @@ function Tabla({ data }) {
 
 
             </Table>
-            <Modal.Body>
-                <Informacion data={data}/>
-            </Modal.Body>
+
         </div>
 
     );
