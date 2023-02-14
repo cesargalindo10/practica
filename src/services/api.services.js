@@ -24,8 +24,16 @@ export const ApiServices = {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
     },
-    updateProduct: async()=>{
-
+    updateProduct: async(id,data)=>{
+      fetch(APIURL+'producto/update?idProducto='+id, {
+        method: 'PUT', 
+        body: JSON.stringify(data), 
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
     }
     
     

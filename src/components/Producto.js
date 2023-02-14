@@ -8,30 +8,48 @@ import Tabla from './Tabla';
 import Informacion from './Informacion';
 
 export default function Producto() {
+    
+    const inicialValues={
+        nombre: "",
+        descripcion: "",
+        precio: "",
+        stock: "",
+        marca_id: "",
+        seccion_id: "",
+    }
+    const iniInfo = {
+        id: "",
+        nombre: "",
+        descripcion: "",
+        precio: "",
+        stock: "",
+        fecha_creacion: "",
+        fecha_actualizacion: "",
+        marca_id: "",
+        seccion_id: ""
+    }
+
 
 
     const [data, setData] = useState([]);
     const [paginacion, setPaginacion] = useState([]);
     const [page, setPage] = useState(1);
     const [show, setShow] = useState(false);
-    const [info, setInfo] = useState([])
     const [showInfo,setShowInfo]=useState(false)
-    const [edicion,setEdicion] = useState(true)
+    const [edicion,setEdicion] = useState(false)
+    const [value, setValue] = useState(inicialValues)
     
 
 
-    const handleClose = () => setShow(false);
+    console.log(value)
+    const handleClose = () => {
+        setShow(false)
+        setEdicion(false)
+        setValue(inicialValues)
+    };
     const handleShow = () => setShow(true);
 
-    
-    const [value, setValue] = useState({
-        nombre: "",
-        descripcion: "",
-        precio: "",
-        stock: "",
-        marca_id: 0,
-        seccion_id: 0,
-    })
+
     const crearProducto = async () => {
         await ApiServices.createProducto(value)
             .then(res => console.log(res))
@@ -48,6 +66,13 @@ export default function Producto() {
 
     }
 
+    const updateProducto = async() =>{
+
+        await ApiServices.updateProduct()
+        .then(res=>console.log(res))
+        loadProducto()
+    }
+    
 
     useEffect(() => {
         loadProducto()
@@ -77,12 +102,12 @@ export default function Producto() {
             'aria-live': 'polite',
         },
     });
-   
+
     return (
         <div>
             <Toaster /> 
             {
-                showInfo ? <Informacion info={info}/> : ""
+                showInfo ? <Informacion value={value}/> : ""
             }
             
             <Button onClick={handleShow}>Crear</Button>
@@ -97,15 +122,13 @@ export default function Producto() {
                         crearProducto={crearProducto}
                         handleClose={handleClose}
                         setValue={setValue}
-                        value={value}
-                        info={info}
-                        edicion={edicion}
+                        value = {value}
+                       
                     />
                 </Modal.Body>
             </Modal>
           
-            <Tabla data={data} setInfo={setInfo} info={info} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setEdicio={setEdicion}/>
-            
+            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} value={value} />
             <button onClick={() => setPage(paginacion.paginaAnterior)} disabled={paginacion.paginaAnterior==null? true:false}>Anterior</button>
             <button onClick={() => setPage(paginacion.PaginaSiguiente)} disabled={paginacion.PaginaSiguiente==null? true:false}>Siguiente</button>
         </div>

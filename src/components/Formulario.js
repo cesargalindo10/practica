@@ -5,17 +5,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function Formulario({crearProducto,handleClose,setValue,value, info, edicion }) {
-
+function Formulario({crearProducto,handleClose,setValue,value}) {
+   
+    const inicialValues = {
+        nombre: "",
+        descripcion: "",
+        precio: "",
+        stock: "",
+        marca_id: "",
+        seccion_id: "",
+    }
     const handleChange = (e) => {
         //console.log(e.target.value)
-        if(edicion){
-            setValue(info)
-        }else{
             setValue({
                 ...value, [e.target.name]: e.target.value,
             })
-        }
+        
        
     }
     const handleSubmit = (e) => {
@@ -23,14 +28,7 @@ function Formulario({crearProducto,handleClose,setValue,value, info, edicion }) 
         //console.log(value)
         crearProducto()
 
-        setValue({
-            nombre: "",
-            descripcion: "",
-            precio: "",
-            stock: "",
-            marca_id: 0,
-            seccion_id: 0,
-        })
+        setValue(inicialValues)
     }
 
 
@@ -83,6 +81,26 @@ function Formulario({crearProducto,handleClose,setValue,value, info, edicion }) 
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="marca">Marca</Form.Label>
+                        <Form.Control
+                            id="marca_id"
+                            type="number"
+                            name="marca_id"
+                            value={value.marca_id}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="seccion">Seccion</Form.Label>
+                        <Form.Control
+                            id="seccion_id"
+                            type="number"
+                            name="seccion_id"
+                            value={value.seccion_id}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+   {/*                  <Form.Group className="mb-3">
+                        <Form.Label htmlFor="marca">Marca</Form.Label>
                         <Form.Select
                             id="marca_id"
                             name="marca_id"
@@ -104,7 +122,7 @@ function Formulario({crearProducto,handleClose,setValue,value, info, edicion }) 
                             <option value=""></option>
                             <option value={1} >1</option>
                         </Form.Select>
-                    </Form.Group>
+                    </Form.Group> */}
                     <Stack direction="horizontal" gap={3}>
                         <Button className=" ms-auto" type="submit">Guardar</Button>
                         <Button className="" variant="danger" onClick={handleClose}>Cancelar</Button>
