@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function Formulario({crearProducto,handleClose,setValue,value}) {
+function Formulario({createUpdateProducto,handleClose,setValue,value}) {
    
     const inicialValues = {
         nombre: "",
@@ -26,7 +26,7 @@ function Formulario({crearProducto,handleClose,setValue,value}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         //console.log(value)
-        crearProducto()
+        createUpdateProducto()
 
         setValue(inicialValues)
     }

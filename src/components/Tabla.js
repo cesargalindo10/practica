@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 
-function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value }) {
+function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEdicion,deleteProduct }) {
 
     //const [b,setB]=useState(false)
 
@@ -11,11 +11,18 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value }) {
         setShowInfo(!showInfo)
         
     }
-    function iniciar(res){
+    function editar(res){
         setValue(res);
         handleShow();
+        setEdicion(true)
        
     }
+    function eliminar(res){
+        setValue(res);
+        deleteProduct()
+       
+    }
+
     //console.log(b)
     return (
         <div className='container'>
@@ -38,8 +45,8 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value }) {
                                 <td>{res.nombre}</td>
                                 <td>
                                     <Button onClick={()=>mostrarInfo(res)} variant="info">{ res.id===value.id && showInfo?"Hide":"Show"}</Button>{' '}
-                                    <Button onClick={()=>iniciar(res)}>Editar</Button>{' '}
-                                    <Button variant="danger">Eliminar</Button>                             
+                                    <Button onClick={()=>editar(res)}>Editar</Button>{' '}
+                                    <Button onClick={()=>eliminar(res)} variant="danger">Eliminar</Button>                             
                                 </td>
                             </tr>
                         </tbody>

@@ -34,6 +34,23 @@ export const ApiServices = {
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response));
+    },
+    deleteProduct: async(idProducto)=>{
+      fetch(APIURL+'producto/delete?idProducto='+idProducto, { method: 'DELETE' })
+      .then(async response => {
+          const data = await response.json();
+
+          // verificamos el error en response
+          if (!response.ok) {
+              // obtener error message from body or default to response status
+              const error = (data && data.message) || response.status;
+              return Promise.reject(error);
+          }
+      })
+      .catch(error => {
+          
+          console.error( error);
+      });
     }
     
     

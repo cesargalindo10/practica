@@ -61,16 +61,19 @@ export default function Producto() {
                 setPaginacion(res.pagination)                          
        
             }
-            )
-           
+            )          
 
     }
 
     const updateProducto = async() =>{
 
-        await ApiServices.updateProduct()
+        await ApiServices.updateProduct(value.id, value)
         .then(res=>console.log(res))
         loadProducto()
+    }
+    const deleteProduct = async() =>{
+        await ApiServices.deleteProduct(value.id)
+        .then(res=>console.log(res))
     }
     
 
@@ -119,7 +122,9 @@ export default function Producto() {
             >
                 <Modal.Body>
                     <Formulario
-                        crearProducto={crearProducto}
+                        //crearProducto={crearProducto}
+                        //updateProduct={updateProducto}
+                        createUpdateProducto={edicion?updateProducto:crearProducto}
                         handleClose={handleClose}
                         setValue={setValue}
                         value = {value}
@@ -128,7 +133,7 @@ export default function Producto() {
                 </Modal.Body>
             </Modal>
           
-            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} value={value} />
+            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} value={value} setEdicion={setEdicion}deleteProduct={deleteProduct}/>
             <button onClick={() => setPage(paginacion.paginaAnterior)} disabled={paginacion.paginaAnterior==null? true:false}>Anterior</button>
             <button onClick={() => setPage(paginacion.PaginaSiguiente)} disabled={paginacion.PaginaSiguiente==null? true:false}>Siguiente</button>
         </div>
