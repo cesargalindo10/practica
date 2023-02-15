@@ -17,9 +17,12 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
         setEdicion(true)
        
     }
-    function eliminar(res){
+    const eliminar=(res)=>{
         setValue(res);
-        deleteProduct()
+        deleteProduct(res)
+        setValue(res);
+        
+       
        
     }
 
@@ -29,6 +32,7 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
             <Table striped bordered hover>
 
                 <thead>
+                
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
@@ -38,9 +42,11 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
                 {
                     data.map((res) =>
 
-
+                        
                         <tbody key={res.id}>
+                            
                             <tr>
+                            
                                 <td  >{res.id}</td>
                                 <td>{res.nombre}</td>
                                 <td>

@@ -27,7 +27,6 @@ function Formulario({createUpdateProducto,handleClose,setValue,value}) {
         e.preventDefault();
         //console.log(value)
         createUpdateProducto()
-
         setValue(inicialValues)
     }
 

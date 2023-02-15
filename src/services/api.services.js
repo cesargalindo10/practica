@@ -51,7 +51,29 @@ export const ApiServices = {
           
           console.error( error);
       });
-    }
+    },
+    removeCategoria: async(idP,idC)=>{
+      try {
+        const response = await fetch(APIURL+'producto/quitar-categoria?producto_id='+idP+'&categoria_id='+idC)
+        const data = await response.json();
+        return data;
+        
+      } catch (error) {
+          console.error("Se produjo un error", error);
+      }
+    },
+    getCategoria : async (id) => {
+      //let response = {} ;
+      try {
+        const response = await fetch(APIURL+"producto/get-categoria?id="+id)
+        const data = await response.json();
+        return data;
+        
+      } catch (error) {
+          console.error("Se produjo un error", error);
+      }
+  },
+
     
     
 }

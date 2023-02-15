@@ -17,19 +17,6 @@ export default function Producto() {
         marca_id: "",
         seccion_id: "",
     }
-    const iniInfo = {
-        id: "",
-        nombre: "",
-        descripcion: "",
-        precio: "",
-        stock: "",
-        fecha_creacion: "",
-        fecha_actualizacion: "",
-        marca_id: "",
-        seccion_id: ""
-    }
-
-
 
     const [data, setData] = useState([]);
     const [paginacion, setPaginacion] = useState([]);
@@ -38,10 +25,11 @@ export default function Producto() {
     const [showInfo,setShowInfo]=useState(false)
     const [edicion,setEdicion] = useState(false)
     const [value, setValue] = useState(inicialValues)
+    const [catId, setCatId] = useState('')
     
 
 
-    console.log(value)
+    //console.log(value)
     const handleClose = () => {
         setShow(false)
         setEdicion(false)
@@ -62,7 +50,6 @@ export default function Producto() {
        
             }
             )          
-
     }
 
     const updateProducto = async() =>{
@@ -71,9 +58,26 @@ export default function Producto() {
         .then(res=>console.log(res))
         loadProducto()
     }
-    const deleteProduct = async() =>{
-        await ApiServices.deleteProduct(value.id)
-        .then(res=>console.log(res))
+    const deleteProduct = async(res) =>{
+        getCategoria(res.id)
+        //console.log(aux)
+        catId.map(item =>(quitarCategoria(res.id,item.categoria_id)))            
+        await ApiServices.deleteProduct(res.id)
+        .then(res=>console.log(res))        
+        loadProducto()
+    }
+    const getCategoria = async(idP) =>{
+        await ApiServices.getCategoria(idP)
+        .then(res => {
+            setCatId(res.data)
+            //console.log(res.data)
+        }
+            
+            )
+    }
+    const quitarCategoria = async(idP,idC)=>{
+        await ApiServices.removeCategoria(idP,idC)
+        .then(res => console.log(res))
     }
     
 
