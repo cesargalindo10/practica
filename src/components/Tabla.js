@@ -22,8 +22,7 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
         setValue(res);
         deleteProduct(res);        
         setValue(res);
-        
-       
+              
        
     }
 

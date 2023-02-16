@@ -59,12 +59,26 @@ export default function Producto() {
         loadProducto()
     }
     const deleteProduct = async(res) =>{
+<<<<<<< HEAD
 
+=======
+        //getCategoria(res.id)
+        //console.log(aux)
+        //catId.map(item =>(quitarCategoria(res.id,item.categoria_id)))       
+        eliminar(res)     
+>>>>>>> 494e047 (descarga)
         await ApiServices.deleteProduct(res.id)
         .then(res=>console.log(res))        
         loadProducto()
     }
+<<<<<<< HEAD
 
+=======
+    const eliminar = (res)=>{
+        getCategoria(res.id)
+        catId.map(item =>(quitarCategoria(res.id,item.categoria_id)))   
+    }
+>>>>>>> 494e047 (descarga)
     const getCategoria = async(idP) =>{
         await ApiServices.getCategoria(idP)
         .then(res => {
@@ -138,8 +152,13 @@ export default function Producto() {
                 </Modal.Body>
             </Modal>
           
+<<<<<<< HEAD
             <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} 
             value={value} setEdicion={setEdicion}deleteProduct={deleteProduct}/>
+=======
+            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} 
+                setValue={setValue} value={value} setEdicion={setEdicion}deleteProduct={deleteProduct}/>
+>>>>>>> 494e047 (descarga)
             <button onClick={() => setPage(paginacion.paginaAnterior)} disabled={paginacion.paginaAnterior==null? true:false}>Anterior</button>
             <button onClick={() => setPage(paginacion.PaginaSiguiente)} disabled={paginacion.PaginaSiguiente==null? true:false}>Siguiente</button>
         </div>
