@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 
-function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEdicion,deleteProduct }) {
+function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEdicion,deleteProduct}) {
 
     //const [b,setB]=useState(false)
 
@@ -18,8 +18,9 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
        
     }
     const eliminar=(res)=>{
+        
         setValue(res);
-        deleteProduct(res)
+        deleteProduct(res);        
         setValue(res);
         
        
@@ -45,8 +46,7 @@ function Tabla({ data, showInfo,setShowInfo, handleShow, setValue,  value, setEd
                         
                         <tbody key={res.id}>
                             
-                            <tr>
-                            
+                            <tr>                            
                                 <td  >{res.id}</td>
                                 <td>{res.nombre}</td>
                                 <td>

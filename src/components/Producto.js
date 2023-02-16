@@ -25,7 +25,7 @@ export default function Producto() {
     const [showInfo,setShowInfo]=useState(false)
     const [edicion,setEdicion] = useState(false)
     const [value, setValue] = useState(inicialValues)
-    const [catId, setCatId] = useState('')
+
     
 
 
@@ -59,25 +59,26 @@ export default function Producto() {
         loadProducto()
     }
     const deleteProduct = async(res) =>{
-        getCategoria(res.id)
-        //console.log(aux)
-        catId.map(item =>(quitarCategoria(res.id,item.categoria_id)))            
+
         await ApiServices.deleteProduct(res.id)
         .then(res=>console.log(res))        
         loadProducto()
     }
+
     const getCategoria = async(idP) =>{
         await ApiServices.getCategoria(idP)
         .then(res => {
-            setCatId(res.data)
-            //console.log(res.data)
+            //setCatId(res.data)
         }
             
             )
     }
+
     const quitarCategoria = async(idP,idC)=>{
+        
         await ApiServices.removeCategoria(idP,idC)
         .then(res => console.log(res))
+        
     }
     
 
@@ -137,7 +138,8 @@ export default function Producto() {
                 </Modal.Body>
             </Modal>
           
-            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} value={value} setEdicion={setEdicion}deleteProduct={deleteProduct}/>
+            <Tabla data={data} showInfo={showInfo} setShowInfo={setShowInfo} handleShow={handleShow} setValue={setValue} 
+            value={value} setEdicion={setEdicion}deleteProduct={deleteProduct}/>
             <button onClick={() => setPage(paginacion.paginaAnterior)} disabled={paginacion.paginaAnterior==null? true:false}>Anterior</button>
             <button onClick={() => setPage(paginacion.PaginaSiguiente)} disabled={paginacion.PaginaSiguiente==null? true:false}>Siguiente</button>
         </div>
