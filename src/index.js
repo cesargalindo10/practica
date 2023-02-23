@@ -11,6 +11,7 @@ import {
   Link,
 } from "react-router-dom";
 import Producto from './components/Producto';
+import { Login } from './components/Autenticacion/Login';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "producto",
     element: <App/>
+  },
+  {
+    path: "login",
+    element: <Login/>
   },
 ]);
 

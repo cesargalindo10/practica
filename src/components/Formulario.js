@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Formulario({createUpdateProducto,handleClose,setValue,value}) {
    
+    
     const inicialValues = {
         nombre: "",
         descripcion: "",
@@ -15,6 +16,7 @@ function Formulario({createUpdateProducto,handleClose,setValue,value}) {
         marca_id: "",
         seccion_id: "",
     }
+
     const handleChange = (e) => {
         //console.log(e.target.value)
             setValue({

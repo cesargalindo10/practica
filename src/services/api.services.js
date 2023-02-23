@@ -38,29 +38,15 @@ export const ApiServices = {
     deleteProduct: async(idProducto)=>{
       fetch(APIURL+'producto/delete?idProducto='+idProducto, { method: 'DELETE' })
       .then(async response => {
-          const data = await response.json();
 
-          // verificamos el error en response
           if (!response.ok) {
-              // obtener error message from body or default to response status
-              const error = (data && data.message) || response.status;
-              return Promise.reject(error);
+
           }
       })
       .catch(error => {
           
-          console.error( error);
+          console.error(error);
       });
-    },
-    removeCategoria: async(idP,idC)=>{
-      try {
-        const response = await fetch(APIURL+'producto/quitar-categoria?producto_id='+idP+'&categoria_id='+idC)
-        const data = await response.json();
-        return data;
-        
-      } catch (error) {
-          console.error("Se produjo un error", error);
-      }
     },
     getCategoria : async (id) => {
       //let response = {} ;
@@ -73,6 +59,22 @@ export const ApiServices = {
           console.error("Se produjo un error", error);
       }
   },
+  login: async (username,password) => {
+    try {
+      const response = await fetch(`${APIURL}user/login`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      //data.status = response.status;
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
     
     
